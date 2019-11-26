@@ -35,18 +35,10 @@ def write_palette_h(data):
     file.write("#define ATOM_APP_USE_PALETTE\n")
     file.write("class AtomPalette {\n")
     file.write("public:\n")
-    file.write("  constexpr static KDColor Unknown = KDColor::RGB24(0xeeeeee);\n")
-    file.write("  constexpr static KDColor AlkaliMetal = KDColor::RGB24(0xffaa00);\n")
-    file.write("  constexpr static KDColor AlkaliEarthMetal = KDColor::RGB24(0xf6f200);\n")
-    file.write("  constexpr static KDColor Lanthanide = KDColor::RGB24(0xffaa8b);\n")
-    file.write("  constexpr static KDColor Actinide = KDColor::RGB24(0xdeaacd);\n")
-    file.write("  constexpr static KDColor TransitionMetal = KDColor::RGB24(0xde999c);\n")
-    file.write("  constexpr static KDColor PostTransitionMetal = KDColor::RGB24(0x9cbaac);\n")
-    file.write("  constexpr static KDColor Metalloid = KDColor::RGB24(0x52ce8b);\n")
-    file.write("  constexpr static KDColor Halogen = KDColor::RGB24(0x00debd);\n")
-    file.write("  constexpr static KDColor ReactiveNonmetal = KDColor::RGB24(0x00ee00);\n")
-    file.write("  constexpr static KDColor NobleGas = KDColor::RGB24(0x8baaff);\n")
-    file.write("  constexpr static KDColor TableLines = KDColor::RGB24(0x323532);\n")
+
+    for key in data["apps"]["atom"].keys():
+        file.write("  constexpr static KDColor " + key + " = KDColor::RGB24(0x" + data["apps"]["atom"][key] + ");\n")
+
     file.write("  constexpr static KDColor AtomColor[] = {\n")
     file.write("      Unknown, AlkaliMetal, AlkaliEarthMetal, Lanthanide, Actinide, TransitionMetal,\n")
     file.write("      PostTransitionMetal, Metalloid, Halogen, ReactiveNonmetal, NobleGas\n")

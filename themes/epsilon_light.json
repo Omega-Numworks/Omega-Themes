@@ -31,5 +31,21 @@
         "GreenLight": "52db8f",
         "Brown": "8d7350",
         "Purple": "6e2d79"
+    },
+    "apps": {
+        "atom": {
+            "Unknown": "eeeeee",
+            "AlkaliMetal": "ffaa00",
+            "AlkaliEarthMetal": "f6f200",
+            "Lanthanide": "ffaa8b",
+            "Actinide": "deaacd",
+            "TransitionMetal": "de999c",
+            "PostTransitionMetal": "9cbaac",
+            "Metalloid": "52ce8b",
+            "Halogen": "00debd",
+            "ReactiveNonmetal": "00ee00",
+            "NobleGas": "8baaff",
+            "TableLines": "323532"
+        }
     }
 }
