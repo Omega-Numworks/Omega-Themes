@@ -3,7 +3,7 @@
     "icons": "epsilon_dark",
     "colors": {
         "Text": "ffffff",
-	"BackgroundHard": "000000",
+        "BackgroundHard": "000000",
         "YellowDark": "ffb734",
         "YellowLight": "ffcc7b",
         "PurpleBright": "656975",
