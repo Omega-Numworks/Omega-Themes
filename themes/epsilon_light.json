@@ -2,6 +2,7 @@
     "name": "Epsilon Light",
     "icons": "default",
     "colors": {
+        "Text": "000000",
         "YellowDark": "ffb734",
         "YellowLight": "ffcc7b",
         "PurpleBright": "656975",
