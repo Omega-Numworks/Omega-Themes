@@ -1,0 +1,33 @@
+{
+    "name": "Epsilon Light",
+    "icons": "default",
+    "colors": {
+        "YellowDark": "ffb734",
+        "YellowLight": "ffcc7b",
+        "PurpleBright": "656975",
+        "PurpleDark": "414147",
+        "GreyWhite": "f5f5f5",
+        "GreyBright": "ececec",
+        "GreyMiddle": "d9d9d9",
+        "GreyDark": "a7a7a7",
+        "GreyVeryDark": "8c8c8c",
+        "Select": "d4d7e0",
+        "SelectDark": "b0b8d8",
+        "WallScreen": "f7f9fa",
+        "WallScreenDark": "e0e6ed",
+        "SubTab": "b8bbc5",
+        "LowBattery": "f30211",
+        "Red": "ff000c",
+        "RedLight": "fe6363",
+        "Magenta": "ff0588",
+        "Turquoise": "60c1ec",
+        "Pink": "ffabb6",
+        "Blue": "5075f2",
+        "BlueLight": "718fee",
+        "Orange": "fe871f",
+        "Green": "50c102",
+        "GreenLight": "52db8f",
+        "Brown": "8d7350",
+        "Purple": "6e2d79"
+    }
+}
