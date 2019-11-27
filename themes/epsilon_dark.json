@@ -35,6 +35,7 @@
     "apps": {
         "atom": {
             "Unknown": "eeeeee",
+            "AtomText": "000000",
             "AlkaliMetal": "ffaa00",
             "AlkaliEarthMetal": "f6f200",
             "Lanthanide": "ffaa8b",
