@@ -78,8 +78,9 @@ def write_palette_h(data):
     file.write("      Unknown, AlkaliMetal, AlkaliEarthMetal, Lanthanide, Actinide, TransitionMetal,\n")
     file.write("      PostTransitionMetal, Metalloid, Halogen, ReactiveNonmetal, NobleGas\n")
     file.write("  };\n")
-    file.write("};\n\n")
-    file.write("#endif\n") """
+    file.write("};\n\n") """
+    
+    file.write("#endif\n")
 
     file.close()
 
