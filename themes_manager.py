@@ -33,7 +33,7 @@ def write_palette_h(data):
             for sub_key in data["colors"][key].keys():
                 file.write("  constexpr static KDColor " + key + sub_key + " = KDColor::RGB24(0x" + data["colors"][key][sub_key] + ");\n")
 
-    # Default values - Not used
+    # Default values - Sometimes never used
     file.write("  constexpr static KDColor YellowDark = KDColor::RGB24(0xffb734);\n")
     file.write("  constexpr static KDColor YellowLight = KDColor::RGB24(0xffcc7b);\n")
     file.write("  constexpr static KDColor PurpleBright = KDColor::RGB24(0x656975);\n")
@@ -67,19 +67,6 @@ def write_palette_h(data):
     file.write("  constexpr static KDColor DataColorLight[] = {RedLight, BlueLight, GreenLight, YellowLight};\n")
     file.write("};\n\n")
 
-    """ file.write("#define ATOM_APP_USE_PALETTE\n")
-    file.write("class AtomPalette {\n")
-    file.write("public:\n")
-
-    for key in data["apps"]["atom"].keys():
-        file.write("  constexpr static KDColor " + key + " = KDColor::RGB24(0x" + data["apps"]["atom"][key] + ");\n")
-
-    file.write("  constexpr static KDColor AtomColor[] = {\n")
-    file.write("      Unknown, AlkaliMetal, AlkaliEarthMetal, Lanthanide, Actinide, TransitionMetal,\n")
-    file.write("      PostTransitionMetal, Metalloid, Halogen, ReactiveNonmetal, NobleGas\n")
-    file.write("  };\n")
-    file.write("};\n\n") """
-    
     file.write("#endif\n")
 
     file.close()

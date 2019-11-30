@@ -5,22 +5,34 @@
         "PrimaryText": "000000",
         "SecondaryText": "6e6e6e",
         "AccentText": "00857f",
-        "BackgroundHard": "ffffff",
-        "BackgroundApps": "fafafa",
-        "BackgroundAppsSecondary": "f0f0f0",
-        "Toolbar": "c03535",
-        "ToolbarText": "ffffff",
-        "ExpressionInputBackground": "e0e0e0",
-        "ExpressionInputBorder": "d9d9d9",
-        "Battery": "ffffff",
-        "BatteryInCharge": "179e1f",
-        "BatteryLow": "992321",
         "ApproximateSignText": "595959",
         "ApproximateExpressionText": "595959",
-        "GridPrimaryLine": "d9d9d9",
-        "GridSecondaryLine": "f5f5f5",
-        "ScrollBarForeground": "4a4a4a",
-        "ScrollBarBackground": "d9d9d9",
+        "Background": {
+            "Hard": "ffffff",
+            "Apps": "fafafa",
+            "AppsSecondary": "f0f0f0"
+        },
+        "Toolbar": {
+            "": "c03535",
+            "Text": "ffffff"
+        },
+        "ExpressionInput": {
+            "Background": "e0e0e0",
+            "Border": "d9d9d9"
+        },
+        "Grid": {
+            "PrimaryLine": "d9d9d9",
+            "SecondaryLine": "f5f5f5"
+        },
+        "Battery": {
+            "": "ffffff",
+            "InCharge": "179e1f",
+            "Low": "992321"
+        },
+        "ScrollBar": {
+            "Foreground": "4a4a4a",
+            "Background": "d9d9d9"
+        },
         "Control": {
             "": "00857f",
             "Enabled": "00b2b0",
@@ -112,6 +124,21 @@
             "CellBackgroundActive": "4a4a4a",
             "CellText": "000000",
             "CellTextActive": "ffffff"
+        },
+        "Atom": {
+            "Unknown": "eeeeee",
+            "Text": "000000",
+            "AlkaliMetal": "ffaa00",
+            "AlkaliEarthMetal": "f6f200",
+            "Lanthanide": "ffaa8b",
+            "Actinide": "deaacd",
+            "TransitionMetal": "de999c",
+            "PostTransitionMetal": "9cbaac",
+            "Metalloid": "52ce8b",
+            "Halogen": "00debd",
+            "ReactiveNonmetal": "00ee00",
+            "NobleGas": "8baaff",
+            "TableLines": "323532"
         }
     }
 }
