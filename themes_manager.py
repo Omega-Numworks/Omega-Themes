@@ -65,6 +65,11 @@ def write_palette_h(data):
 
     file.write("  constexpr static KDColor DataColor[] = {Red, Blue, Green, YellowDark, Magenta, Turquoise, Pink, Orange};\n")
     file.write("  constexpr static KDColor DataColorLight[] = {RedLight, BlueLight, GreenLight, YellowLight};\n")
+
+    file.write("  constexpr static KDColor AtomColor[] = {\n")
+    file.write("    AtomUnknown, AtomAlkaliMetal, AtomAlkaliEarthMetal, AtomLanthanide, AtomActinide, AtomTransitionMetal,\n")
+    file.write("    AtomPostTransitionMetal, AtomMetalloid, AtomHalogen, AtomReactiveNonmetal, AtomNobleGas\n")
+    file.write("  };\n")
     file.write("};\n\n")
 
     file.write("#endif\n")
