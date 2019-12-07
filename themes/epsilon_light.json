@@ -4,6 +4,8 @@
     "colors": {
         "Text": "000000",
 	    "BackgroundHard": "ffffff",
+	    "Toolbar": "ffb734",
+	    "ToolbarText": "ffffff",
         "YellowDark": "ffb734",
         "YellowLight": "ffcc7b",
         "PurpleBright": "656975",
