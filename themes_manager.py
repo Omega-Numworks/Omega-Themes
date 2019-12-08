@@ -1,80 +1,75 @@
 import sys
 import argparse
-import io
 import os
 import json
-import tkinter as tk
-from PIL import Image, ImageTk
-
 
 def get_data(theme):
+    """
+    Load theme from file
+    """
     json_file = open("themes/" + theme + ".json", "r")
     data = json.load(json_file)
     json_file.close()
     
     return data
 
-
-def write_palette_h(data):
-    file = open("../escher/include/escher/palette.h", "w")
-    file.write("#ifndef ESCHER_PALETTE_H\n")
-    file.write("#define ESCHER_PALETTE_H\n\n")
-    file.write("#include <kandinsky/color.h>\n\n")
-    file.write("class Palette {\n")
-    file.write("public:\n")
-    
-    print(data["colors"])
+def write_palette_h(data, file_p):
+    """
+    Write the header to file_p
+    """
+    file_p.write("#ifndef ESCHER_PALETTE_H\n")
+    file_p.write("#define ESCHER_PALETTE_H\n\n")
+    file_p.write("#include <kandinsky/color.h>\n\n")
+    file_p.write("class Palette {\n")
+    file_p.write("public:\n")
 
     for key in data["colors"].keys():
-        print(data["colors"][key])
         if type(data["colors"][key]) is str:
-            file.write("  constexpr static KDColor " + key + " = KDColor::RGB24(0x" + data["colors"][key] + ");\n")
+            file_p.write("  constexpr static KDColor " + key + " = KDColor::RGB24(0x" + data["colors"][key] + ");\n")
         else:
             for sub_key in data["colors"][key].keys():
-                file.write("  constexpr static KDColor " + key + sub_key + " = KDColor::RGB24(0x" + data["colors"][key][sub_key] + ");\n")
+                file_p.write("  constexpr static KDColor " + key + sub_key + " = KDColor::RGB24(0x" + data["colors"][key][sub_key] + ");\n")
 
     # Default values - Sometimes never used
-    file.write("  constexpr static KDColor YellowDark = KDColor::RGB24(0xffb734);\n")
-    file.write("  constexpr static KDColor YellowLight = KDColor::RGB24(0xffcc7b);\n")
-    file.write("  constexpr static KDColor PurpleBright = KDColor::RGB24(0x656975);\n")
-    file.write("  constexpr static KDColor PurpleDark = KDColor::RGB24(0x414147);\n")
-    file.write("  constexpr static KDColor GreyWhite = KDColor::RGB24(0xf5f5f5);\n")
-    file.write("  constexpr static KDColor GreyBright = KDColor::RGB24(0xececec);\n")
-    file.write("  constexpr static KDColor GreyMiddle = KDColor::RGB24(0xd9d9d9);\n")
-    file.write("  constexpr static KDColor GreyDark = KDColor::RGB24(0xa7a7a7);\n")
-    file.write("  constexpr static KDColor GreyVeryDark = KDColor::RGB24(0x8c8c8c);\n")
-    file.write("  constexpr static KDColor Select = KDColor::RGB24(0xd4d7e0);\n")
-    file.write("  constexpr static KDColor SelectDark = KDColor::RGB24(0xb0b8d8);\n")
-    file.write("  constexpr static KDColor WallScreen = KDColor::RGB24(0xf7f9fa);\n")
-    file.write("  constexpr static KDColor WallScreenDark = KDColor::RGB24(0xe0e6ed);\n")
-    file.write("  constexpr static KDColor SubTab = KDColor::RGB24(0xb8bbc5);\n")
-    file.write("  constexpr static KDColor LowBattery = KDColor::RGB24(0xf30211);\n")
-    file.write("  constexpr static KDColor Red = KDColor::RGB24(0xff000c);\n")
-    file.write("  constexpr static KDColor RedLight = KDColor::RGB24(0xfe6363);\n")
-    file.write("  constexpr static KDColor Magenta = KDColor::RGB24(0xff0588);\n")
-    file.write("  constexpr static KDColor Turquoise = KDColor::RGB24(0x60c1ec);\n")
-    file.write("  constexpr static KDColor Pink = KDColor::RGB24(0xffabb6);\n")
-    file.write("  constexpr static KDColor Blue = KDColor::RGB24(0x5075f2);\n")
-    file.write("  constexpr static KDColor BlueLight = KDColor::RGB24(0x718fee);\n")
-    file.write("  constexpr static KDColor Orange = KDColor::RGB24(0xfe871f);\n")
-    file.write("  constexpr static KDColor Green = KDColor::RGB24(0x50c102);\n")
-    file.write("  constexpr static KDColor GreenLight = KDColor::RGB24(0x52db8f);\n")
-    file.write("  constexpr static KDColor Brown = KDColor::RGB24(0x8d7350);\n")
-    file.write("  constexpr static KDColor Purple = KDColor::RGB24(0x6e2d79);\n")
+    file_p.write("  constexpr static KDColor YellowDark = KDColor::RGB24(0xffb734);\n")
+    file_p.write("  constexpr static KDColor YellowLight = KDColor::RGB24(0xffcc7b);\n")
+    file_p.write("  constexpr static KDColor PurpleBright = KDColor::RGB24(0x656975);\n")
+    file_p.write("  constexpr static KDColor PurpleDark = KDColor::RGB24(0x414147);\n")
+    file_p.write("  constexpr static KDColor GreyWhite = KDColor::RGB24(0xf5f5f5);\n")
+    file_p.write("  constexpr static KDColor GreyBright = KDColor::RGB24(0xececec);\n")
+    file_p.write("  constexpr static KDColor GreyMiddle = KDColor::RGB24(0xd9d9d9);\n")
+    file_p.write("  constexpr static KDColor GreyDark = KDColor::RGB24(0xa7a7a7);\n")
+    file_p.write("  constexpr static KDColor GreyVeryDark = KDColor::RGB24(0x8c8c8c);\n")
+    file_p.write("  constexpr static KDColor Select = KDColor::RGB24(0xd4d7e0);\n")
+    file_p.write("  constexpr static KDColor SelectDark = KDColor::RGB24(0xb0b8d8);\n")
+    file_p.write("  constexpr static KDColor WallScreen = KDColor::RGB24(0xf7f9fa);\n")
+    file_p.write("  constexpr static KDColor WallScreenDark = KDColor::RGB24(0xe0e6ed);\n")
+    file_p.write("  constexpr static KDColor SubTab = KDColor::RGB24(0xb8bbc5);\n")
+    file_p.write("  constexpr static KDColor LowBattery = KDColor::RGB24(0xf30211);\n")
+    file_p.write("  constexpr static KDColor Red = KDColor::RGB24(0xff000c);\n")
+    file_p.write("  constexpr static KDColor RedLight = KDColor::RGB24(0xfe6363);\n")
+    file_p.write("  constexpr static KDColor Magenta = KDColor::RGB24(0xff0588);\n")
+    file_p.write("  constexpr static KDColor Turquoise = KDColor::RGB24(0x60c1ec);\n")
+    file_p.write("  constexpr static KDColor Pink = KDColor::RGB24(0xffabb6);\n")
+    file_p.write("  constexpr static KDColor Blue = KDColor::RGB24(0x5075f2);\n")
+    file_p.write("  constexpr static KDColor BlueLight = KDColor::RGB24(0x718fee);\n")
+    file_p.write("  constexpr static KDColor Orange = KDColor::RGB24(0xfe871f);\n")
+    file_p.write("  constexpr static KDColor Green = KDColor::RGB24(0x50c102);\n")
+    file_p.write("  constexpr static KDColor GreenLight = KDColor::RGB24(0x52db8f);\n")
+    file_p.write("  constexpr static KDColor Brown = KDColor::RGB24(0x8d7350);\n")
+    file_p.write("  constexpr static KDColor Purple = KDColor::RGB24(0x6e2d79);\n")
     # End
 
-    file.write("  constexpr static KDColor DataColor[] = {Red, Blue, Green, YellowDark, Magenta, Turquoise, Pink, Orange};\n")
-    file.write("  constexpr static KDColor DataColorLight[] = {RedLight, BlueLight, GreenLight, YellowLight};\n")
+    file_p.write("  constexpr static KDColor DataColor[] = {Red, Blue, Green, YellowDark, Magenta, Turquoise, Pink, Orange};\n")
+    file_p.write("  constexpr static KDColor DataColorLight[] = {RedLight, BlueLight, GreenLight, YellowLight};\n")
 
-    file.write("  constexpr static KDColor AtomColor[] = {\n")
-    file.write("    AtomUnknown, AtomAlkaliMetal, AtomAlkaliEarthMetal, AtomLanthanide, AtomActinide, AtomTransitionMetal,\n")
-    file.write("    AtomPostTransitionMetal, AtomMetalloid, AtomHalogen, AtomReactiveNonmetal, AtomNobleGas\n")
-    file.write("  };\n")
-    file.write("};\n\n")
+    file_p.write("  constexpr static KDColor AtomColor[] = {\n")
+    file_p.write("    AtomUnknown, AtomAlkaliMetal, AtomAlkaliEarthMetal, AtomLanthanide, AtomActinide, AtomTransitionMetal,\n")
+    file_p.write("    AtomPostTransitionMetal, AtomMetalloid, AtomHalogen, AtomReactiveNonmetal, AtomNobleGas\n")
+    file_p.write("  };\n")
+    file_p.write("};\n\n")
 
-    file.write("#endif\n")
-
-    file.close()
+    file_p.write("#endif\n")
 
 
 # parser = argparse.ArgumentParser(description="Process the themes.")
@@ -83,75 +78,28 @@ def write_palette_h(data):
 # args = parser.parse_args()
 # data = get_data(args.theme)
 
-# write_palette_h(data)
+def main(args):
+    if (args.list):
+        print(" ==== Avaliable themes ====");
+        for file_info in os.listdir("themes"):
+            filename = os.path.splitext(file_info)[0]
+            print(filename)
+        sys.exit(0)
 
-def get_available_themes():
-    themes = []
-    for file in os.listdir("themes"):
-        filename = os.path.splitext(file)[0]
-        theme = filename, filename.replace("_", " ").capitalize()
-
-        themes.append(theme)
-
-    return themes
-
-
-themes = get_available_themes()
-
-
-# UI
-
-class Window:
-    def apply_theme(self, theme_index):
-        if theme_index != ():
-            filename = themes[theme_index[0]][0]
-            data = get_data(filename)
-            write_palette_h(data)
-            self.popup("Omega - Themes", "Theme applied successfully")
-        else:
-            self.popup("Omega - Themes", "Please select a theme first")
-
-
-    def create_ui(self):
-        master = tk.Tk()
-        master.title("Omega - Themes")
-        master.geometry("260x400")
-        master.resizable(width=False, height=False)
-
-        # Image
-        image = ImageTk.PhotoImage(Image.open("Omega.png").resize((200, 70)))
-        panel = tk.Label(master, image = image, height = 100)
-        panel.pack(fill=tk.X)
-
-        # Listbox
-        listbox = tk.Listbox(master, height=15)
-        listbox.pack(fill=tk.X)
-
-        for i in range(len(themes)):
-            listbox.insert(i, themes[i][1])
-        
-        # Button
-        patch_button = tk.Button(master, text="Apply", command=lambda: self.apply_theme(listbox.curselection()))
-        patch_button.pack(fill=tk.X)
-
-        self.window = master
-
-        master.mainloop()
-
+    data = get_data(args.theme)
     
-    def popup(self, title, message):
-        popup = tk.Toplevel()
-        popup.title("Omega - Themes")
-        popup.geometry("400x60")
-        popup.resizable(width=False, height=False)
+    if (args.stdout):
+        write_palette_h(data, sys.stdout)
+    else:
+        with open("../escher/include/escher/palette.h", "w") as palette_file:
+            write_palette_h(data, palette_file)
 
-        message = tk.Label(popup, text=message, anchor="w")
-        message.pack(fill=tk.X)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process the themes.")
+    parser.add_argument("theme", nargs="?", help="the name of the theme")
+    parser.add_argument("-l", "--list", help="list themes", action="store_true")
+    parser.add_argument("--stdout", help="print palette.h to stdout", action="store_true")
 
-        button = tk.Button(popup, text="Exit", command=lambda: sys.exit())
-        button.pack(side=tk.RIGHT)
-        
-        popup.mainloop()
+    args = parser.parse_args()
+    main(args)
 
-
-Window().create_ui()
