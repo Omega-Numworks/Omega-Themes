@@ -39,15 +39,15 @@
             "Disabled": "9e9e9e"
         },
         "Calculation": {
-            "BackgroundOdd": "ffffff",
-            "BackgroundEven": "fafafa",
+            "BackgroundOdd": "fafafa",
+            "BackgroundEven": "ffffff",
             "EmptyBox": "c4c4c4",
             "EmptyBoxNeeded": "00857f"
         },
         "Code": {
-            "Background": "000000",
+            "Background": "ffffff",
             "BackgroundSelected": "e0e0e0",
-            "Text": "ffffff",
+            "Text": "000000",
             "Comment": "999988",
             "Number": "009999",
             "Keyword": "ff000c",
