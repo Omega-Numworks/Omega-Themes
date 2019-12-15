@@ -87,7 +87,7 @@
         "Button": {
             "Background": "e0e0e0",
             "BackgroundSelected": "d1d1d1",
-            "BackgroundSelectedHighContrast": "595959",
+            "BackgroundSelectedHighContrast": "00b2b0",
             "Border": "adadad",
             "RowBorder": "d9d9d9",
             "BorderOut": "f5f5f5",
