@@ -92,12 +92,13 @@ def main(args):
     if (args.stdout):
         write_palette_h(data, sys.stdout)
     else:
-        with open("../escher/include/escher/palette.h", "w") as palette_file:
+        with open(args.output, "w") as palette_file:
             write_palette_h(data, palette_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process the themes.")
     parser.add_argument("theme", nargs="?", help="the name of the theme")
+    parser.add_argument("output", nargs="?", help="path to the output header file")
     parser.add_argument("-l", "--list", help="list themes", action="store_true")
     parser.add_argument("--stdout", help="print palette.h to stdout", action="store_true")
 
