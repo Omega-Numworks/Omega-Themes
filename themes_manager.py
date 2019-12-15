@@ -7,7 +7,8 @@ def get_data(theme):
     """
     Load theme from file
     """
-    json_file = open("themes/" + theme + ".json", "r")
+    
+    json_file = open(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "themes" + os.path.sep + theme + ".json", "r")
     data = json.load(json_file)
     json_file.close()
     
@@ -81,7 +82,7 @@ def write_palette_h(data, file_p):
 def main(args):
     if (args.list):
         print(" ==== Avaliable themes ====");
-        for file_info in os.listdir("themes"):
+        for file_info in os.listdir(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "themes"):
             filename = os.path.splitext(file_info)[0]
             print(filename)
         sys.exit(0)
@@ -91,12 +92,13 @@ def main(args):
     if (args.stdout):
         write_palette_h(data, sys.stdout)
     else:
-        with open("../escher/include/escher/palette.h", "w") as palette_file:
+        with open(args.output, "w") as palette_file:
             write_palette_h(data, palette_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process the themes.")
     parser.add_argument("theme", nargs="?", help="the name of the theme")
+    parser.add_argument("output", nargs="?", help="path to the output header file")
     parser.add_argument("-l", "--list", help="list themes", action="store_true")
     parser.add_argument("--stdout", help="print palette.h to stdout", action="store_true")
 
