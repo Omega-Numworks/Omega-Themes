@@ -2,15 +2,24 @@ import sys
 import argparse
 import os
 import json
+import shutil
+
+
+def get_icons_list():
+    """
+    Load icon list from file
+    """
+    with open(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "icons.json", "r") as json_file:
+        data = json.load(json_file)
+    
+    return data
 
 def get_data(theme):
     """
     Load theme from file
     """
-    
-    json_file = open(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "themes" + os.path.sep + theme + ".json", "r")
-    data = json.load(json_file)
-    json_file.close()
+    with open(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "themes" + os.path.sep + theme + ".json", "r") as json_file:
+        data = json.load(json_file)
     
     return data
 
@@ -89,17 +98,34 @@ def main(args):
 
     data = get_data(args.theme)
     
-    if (args.stdout):
-        write_palette_h(data, sys.stdout)
+    if (args.icon):
+        # Get the icon in the icon theme folder
+        icons = get_icons_list()
+        
+        icon_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "icons" + os.path.sep + data["icons"] + os.path.sep + icons[args.output.replace(args.build_dir, "")]
+        
+        # Check if the file exists
+        if os.path.isfile(icon_path):
+            # If yes, copy from theme
+            shutil.copyfile(icon_path, args.output)
+        else:
+            # If no, copy from src
+            print(" (!!)   Icon " + icons[args.output.replace(args.build_dir, "")] + " not found in icon theme " + data["icons"] + ". Using default!")
+            shutil.copyfile(args.output.replace(args.build_dir, ""), args.output)
     else:
-        with open(args.output, "w") as palette_file:
-            write_palette_h(data, palette_file)
+        if (args.stdout):
+            write_palette_h(data, sys.stdout)
+        else:
+            with open(args.output, "w") as palette_file:
+                write_palette_h(data, palette_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process the themes.")
     parser.add_argument("theme", nargs="?", help="the name of the theme")
     parser.add_argument("output", nargs="?", help="path to the output header file")
+    parser.add_argument("build_dir", nargs="?", help="path to the output folder")
     parser.add_argument("-l", "--list", help="list themes", action="store_true")
+    parser.add_argument("-i", "--icon", help="outputs an icon instead of a header", action="store_true")
     parser.add_argument("--stdout", help="print palette.h to stdout", action="store_true")
 
     args = parser.parse_args()
