@@ -29,4 +29,4 @@ Then, go back to the Omega folder with `cd ..` and finish the installation guide
 
 ## License
 
-Omega and Omega-Themes is released under a [CC BY-NC-SA License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). NumWorks is a registered trademark.
+Omega-Themes is released under a [CC BY-NC-SA License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). NumWorks is a registered trademark.
