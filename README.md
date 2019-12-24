@@ -26,3 +26,7 @@ Then, go back to the Omega folder with `cd ..` and finish the installation guide
 
 - Don't hesitate to open an issue if you have any ideas.
 - Soon, you'll be able to create your own themes repositories. We're working on this feature.
+
+## License
+
+Omega-Themes is released under a [CC BY-NC-SA License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). NumWorks is a registered trademark.
