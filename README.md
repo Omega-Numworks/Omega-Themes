@@ -11,16 +11,17 @@ Omega-Themes `BETA` is the theme engine of [Omega](https://github.com/Omega-Numw
 
 ## Installation
 
-First of all, follow the installation guide of Omega [here](https://github.com/Omega-Numworks/Omega), but stop right before the `make clean` command. Then, execute this:
+While compiling Omega, add the `OMEGA_THEME` flag :
 
 ```
-cd themes
-python themes_manager.py <name_of_the_theme>
+make MODEL=n0100 USERNAME="" OMEGA_THEME=the_name_of_the_theme -j4
 ```
 
-To know the available themes, execute the following command: `python themes_manager.py -l`.
-
-Then, go back to the Omega folder with `cd ..` and finish the installation guide of Omega.
+There are 4 themes:
+* Omega Light (`OMEGA_THEME=omega_light`)
+* Omega Dark (`OMEGA_THEME=omega_dark`)
+* Epsilon Light (`OMEGA_THEME=epsilon_light`)
+* Epsilon Dark (`OMEGA_THEME=epsilon_dark`)
 
 ## An idea of theme?
 
