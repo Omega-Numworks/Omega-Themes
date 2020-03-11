@@ -14,7 +14,7 @@ Omega-Themes `BETA` is the theme engine of [Omega](https://github.com/Omega-Numw
 While compiling Omega, add the `OMEGA_THEME` flag :
 
 ```
-make MODEL=n0100 USERNAME="" OMEGA_THEME=the_name_of_the_theme -j4
+make USERNAME="" OMEGA_THEME=the_name_of_the_theme -j4
 ```
 
 There are 4 themes:
