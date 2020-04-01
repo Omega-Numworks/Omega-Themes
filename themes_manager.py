@@ -81,7 +81,7 @@ def write_palette_h(data, file_p):
 
     file_p.write("  constexpr static size_t numberOfDataColors() { return sizeof(DataColor)/sizeof(KDColor); }\n");
     file_p.write("  constexpr static size_t numberOfLightDataColors() { return sizeof(DataColorLight)/sizeof(KDColor); }\n");
-    file_p.write("  static KDColor nextDataColor(int * colorIndex)\n");
+    file_p.write("  static KDColor nextDataColor(int * colorIndex);\n");
     file_p.write("};\n\n")
 
     file_p.write("#endif\n")
