@@ -29,7 +29,8 @@ def write_palette_h(data, file_p):
     """
     file_p.write("#ifndef ESCHER_PALETTE_H\n")
     file_p.write("#define ESCHER_PALETTE_H\n\n")
-    file_p.write("#include <kandinsky/color.h>\n\n")
+    file_p.write("#include <kandinsky/color.h>\n")
+    file_p.write("#include <stddef.h>\n\n")
     file_p.write("class Palette {\n")
     file_p.write("public:\n")
 
@@ -76,7 +77,11 @@ def write_palette_h(data, file_p):
     file_p.write("  constexpr static KDColor AtomColor[] = {\n")
     file_p.write("    AtomUnknown, AtomAlkaliMetal, AtomAlkaliEarthMetal, AtomLanthanide, AtomActinide, AtomTransitionMetal,\n")
     file_p.write("    AtomPostTransitionMetal, AtomMetalloid, AtomHalogen, AtomReactiveNonmetal, AtomNobleGas\n")
-    file_p.write("  };\n")
+    file_p.write("  };\n\n")
+
+    file_p.write("  constexpr static size_t numberOfDataColors() { return sizeof(DataColor)/sizeof(KDColor); }\n");
+    file_p.write("  constexpr static size_t numberOfLightDataColors() { return sizeof(DataColorLight)/sizeof(KDColor); }\n");
+    file_p.write("  static KDColor nextDataColor(int * colorIndex)\n");
     file_p.write("};\n\n")
 
     file_p.write("#endif\n")
