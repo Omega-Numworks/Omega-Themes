@@ -123,7 +123,9 @@
             "CellBackground": "ffffff",
             "CellBackgroundActive": "ffb734",
             "CellText": "000000",
-            "CellTextActive": "ffffff"
+            "CellTextActive": "ffffff",
+            "CellTextExternal": "008f87",
+            "CellTextExternalActive": "6fe6df"
         },
         "Atom": {
             "Unknown": "eeeeee",
