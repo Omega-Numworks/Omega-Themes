@@ -42,7 +42,8 @@
             "BackgroundOdd": "fafafa",
             "BackgroundEven": "ffffff",
             "EmptyBox": "c4c4c4",
-            "EmptyBoxNeeded": "00857f"
+            "EmptyBoxNeeded": "00857f",
+            "TrigoAndComplexForeground": "ff000c"
         },
         "Code": {
             "Background": "ffffff",
@@ -52,7 +53,8 @@
             "Number": "009999",
             "Keyword": "ff000c",
             "Operator": "d73a49",
-            "String": "032f62"
+            "String": "032f62",
+            "GutterViewBackground": "E4E6E7"
         },
         "Probability": {
             "Curve": "00857f",
