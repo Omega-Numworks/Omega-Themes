@@ -87,8 +87,8 @@
             "CellBorder": "ededef"
         },
         "Button": {
-            "Background": "e0e0e0",
-            "BackgroundSelected": "d1d1d1",
+            "Background": "e6e6e6",
+            "BackgroundSelected": "c9c9c9",
             "BackgroundSelectedHighContrast": "00b2b0",
             "Border": "adadad",
             "RowBorder": "d9d9d9",
