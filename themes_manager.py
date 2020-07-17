@@ -105,6 +105,8 @@ def write_palette_h(data, file_p):
     file_p.write("  constexpr static KDColor GreenLight = KDColor::RGB24(0x52db8f);\n")
     file_p.write("  constexpr static KDColor Brown = KDColor::RGB24(0x8d7350);\n")
     file_p.write("  constexpr static KDColor Purple = KDColor::RGB24(0x6e2d79);\n")
+    file_p.write("  constexpr static KDColor BlueishGrey = KDColor::RGB24(0x919ea4);\n")
+    file_p.write("  constexpr static KDColor Cyan = KDColorBlue;\n")
     # End
 
     file_p.write("  constexpr static KDColor DataColor[] = {Red, Blue, Green, YellowDark, Magenta, Turquoise, Pink, Orange};\n")
