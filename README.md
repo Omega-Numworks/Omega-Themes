@@ -11,22 +11,34 @@ Omega-Themes `BETA` is the theme engine of [Omega](https://github.com/Omega-Numw
 
 ## Installation
 
-While compiling Omega, add the `OMEGA_THEME` flag :
+While compiling Omega, add the `THEME_NAME` flag :
 
 ```
-make USERNAME="" OMEGA_THEME=the_name_of_the_theme -j4
+make THEME_NAME=the_name_of_the_theme -j4
 ```
 
 There are 4 themes:
-* Omega Light (`OMEGA_THEME=omega_light`)
-* Omega Dark (`OMEGA_THEME=omega_dark`)
-* Epsilon Light (`OMEGA_THEME=epsilon_light`)
-* Epsilon Dark (`OMEGA_THEME=epsilon_dark`)
+* Omega Light (`THEME_NAME=omega_light`)
+* Omega Dark (`THEME_NAME=omega_dark`)
+* Epsilon Light (`THEME_NAME=epsilon_light`)
+* Epsilon Dark (`THEME_NAME=epsilon_dark`)
 
-## An idea of theme?
+## 3rd party themes
 
-- Don't hesitate to open an issue if you have any ideas.
-- Soon, you'll be able to create your own themes repositories. We're working on this feature.
+To make your own theme, you can use our 3rd party theme system :
+* Create a new repository with your theme (there is an example [here](https://github.com/Omega-Numworks/Omega-Theme-Example)). Note: You can put several themes in the same repository.
+* It's done!
+
+To install your new theme, use these flags during the compilation:
+
+```
+make THEME_REPO={your repository url} THEME_NAME={Your theme name}
+```
+
+Example:
+```
+make THEME_REPO=https://github.com/Omega-Numworks/Omega-Theme-Example.git THEME_NAME=omega_blue
+```
 
 ## License
 
