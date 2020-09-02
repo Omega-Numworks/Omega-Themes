@@ -5,37 +5,42 @@ import json
 import shutil
 import subprocess
 
+
 def check_for_git():
     try:
         output = subprocess.check_output(["git", "--version"])
-        return True;
+        return True
     except FileNotFoundError:
         print("ERROR: Git not found! Can't download theme from the internet.", file=sys.stderr)
-        return False;
+        return False
+
 
 def check_git_remote(remote_url):
     try:
         output = subprocess.check_output(["git", "ls-remote", remote_url], env=dict(os.environ, GIT_ASKPASS="/bin/true"), stderr=subprocess.PIPE)
-        return True;
+        return True
     except subprocess.CalledProcessError:
         print("ERROR: Invalid remote " + remote_url + "!", file=os.stderr)
-        return False;
+        return False
+
 
 def git_pull(folder):
     try:
         print("Updating " + folder + "...", file=sys.stderr)
         output = subprocess.check_output(["git", "-C", folder, "pull"], env=dict(os.environ, GIT_ASKPASS="/bin/true"), stderr=subprocess.PIPE)
-        return True;
+        return True
     except subprocess.CalledProcessError:
-        return False;
+        return False
+
 
 def git_clone(url, folder):
     try:
         print("Cloning " + url + " into " + folder + "...", file=sys.stderr)
         output = subprocess.check_output(["git", "clone", url, folder, "--recurse-submodules"], env=dict(os.environ, GIT_ASKPASS="/bin/true"), stderr=subprocess.PIPE)
-        return True;
+        return True
     except subprocess.CalledProcessError:
-        return False;
+        return False
+
 
 def get_icons_list():
     """
@@ -43,8 +48,9 @@ def get_icons_list():
     """
     with open(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "icons.json", "r") as json_file:
         data = json.load(json_file)
-    
+
     return data
+
 
 def get_data(theme, path):
     """
@@ -54,10 +60,11 @@ def get_data(theme, path):
         with open(path + os.path.sep + theme + ".json", "r") as json_file:
             data = json.load(json_file)
     except FileNotFoundError:
-        print("ERROR: Theme " + theme + " doesn't exist!", file=sys.stderr);
-        sys.exit(3);
-    
+        print("ERROR: Theme " + theme + " doesn't exist!", file=sys.stderr)
+        sys.exit(3)
+
     return data
+
 
 def write_palette_h(data, file_p):
     """
@@ -117,38 +124,40 @@ def write_palette_h(data, file_p):
     file_p.write("    AtomPostTransitionMetal, AtomMetalloid, AtomHalogen, AtomReactiveNonmetal, AtomNobleGas\n")
     file_p.write("  };\n\n")
 
-    file_p.write("  constexpr static size_t numberOfDataColors() { return sizeof(DataColor)/sizeof(KDColor); }\n");
-    file_p.write("  constexpr static size_t numberOfLightDataColors() { return sizeof(DataColorLight)/sizeof(KDColor); }\n");
-    file_p.write("  static KDColor nextDataColor(int * colorIndex);\n");
+    file_p.write("  constexpr static size_t numberOfDataColors() { return sizeof(DataColor)/sizeof(KDColor); }\n")
+    file_p.write("  constexpr static size_t numberOfLightDataColors() { return sizeof(DataColorLight)/sizeof(KDColor); }\n")
+    file_p.write("  static KDColor nextDataColor(int * colorIndex);\n")
     file_p.write("};\n\n")
 
     file_p.write("#endif\n")
 
+
 def handle_git(args):
-    output_folder = os.path.basename(args.repo);
-    output_folder = output_folder[:-4] if output_folder.endswith(".git") else output_folder # Remove .git extension if present.
-    
+    output_folder = os.path.basename(args.repo)
+    output_folder = output_folder[:-4] if output_folder.endswith(".git") else output_folder  # Remove .git extension if present.
+
     output_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "themes" + os.path.sep + "git" + os.path.sep + output_folder
-    
-    if (not args.icon): # Assume .h is called before icons, avoiding lot of pull for nothing.
-        if (os.path.exists(output_path)): # If directory exists, try to pull
-            if (not git_pull(output_path)): # If can't pull, delete and re-clone.
+
+    if (not args.icon):  # Assume .h is called before icons, avoiding lot of pull for nothing.
+        if (os.path.exists(output_path)):  # If directory exists, try to pull
+            if (not git_pull(output_path)):  # If can't pull, delete and re-clone.
                 shutil.rmtree(output_path)
                 git_clone(args.repo, output_path)
-        else: # If directory doesn't exist, clone.
+        else:  # If directory doesn't exist, clone.
             git_clone(args.repo, output_path)
-    
+
     handle_theme(args, output_path)
+
 
 def handle_theme(args, path):
     data = get_data(args.theme, path)
-    
+
     if (args.icon):
         # Get the icon in the icon theme folder
         icons = get_icons_list()
-        
+
         icon_path = path + os.path.sep + data["icons"] + os.path.sep + icons[args.output.replace(args.build_dir, "")]
-        
+
         # Check if the file exists
         if os.path.isfile(icon_path):
             # If yes, copy from theme
@@ -164,9 +173,10 @@ def handle_theme(args, path):
             with open(args.output, "w") as palette_file:
                 write_palette_h(data, palette_file)
 
+
 def main(args):
     if (args.list):
-        print(" ==== Local themes ====");
+        print(" ==== Local themes ====")
         for file_info in os.listdir(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "themes" + os.path.sep + "local"):
             if (file_info.endswith(".json")):
                 filename = os.path.splitext(file_info)[0]
@@ -201,4 +211,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args)
-
